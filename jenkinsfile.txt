@@ -1,39 +1,42 @@
-node('workers'){
-    try {
-        stage('Checkout'){
-            checkout scm
-        }
- 
-        stage('Quality Test'){ 
-            echo "Running quality tests"
-        }
- 
-        stage('Unit Test'){
-            echo "Running unit tests"
-        }
- 
-        stage('Security Test'){
-            echo "Running security checks"
-        }
- 
-        stage('Build'){ 
-            echo "Building artifact"
-        }
- 
-        stage('Push'){ 
-           echo "Storing artifact"
-        }
- 
-        stage('Deploy'){
-            echo "Deploying artifact"
-        }
- 
-        stage('Acceptance Tests'){
-            echo "Running post-integrations tests"
-        }
-    } catch(err){
-        echo "Handling errors" 
-    } finally{
-       echo "Cleaning up"
-    }
+pipeline
+{
+agent any
+stages
+{
+ stage('Commit')
+ {
+  steps
+  {
+   echo "Source Code Download from the GITHUB to Declarative Pipeline......."
+  }
+ } 
+ stage('Build')
+ {    
+  steps
+   {
+    echo "This is Build project run with maven tool ................"
+   }
+  }
+ stage('Test')
+ {
+  steps
+  {
+    echo "This is Test project run with Selenium tool ................"
+  }
+ } 
+ stage('Deploy')
+ {    
+  steps
+   {
+    echo "This is Deploy project run with Docker tool ................"
+   }
+  }
+ stage('Monitor')
+ {    
+  steps
+   {
+    echo "This is Monitoring project run with Splunk tool ................"
+   }
+  }
+}
 }
